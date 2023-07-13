@@ -1,0 +1,183 @@
+body{
+    background: #e9e9e9;
+    color: #666666;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    font-size: 14px;
+    margin: 0px;
+}
+
+/* Main Content Styles */
+.container {
+    width: 69%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    width: 50%;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 60px 0 40px 0;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* Right Side Card Styles */
+.card .title {
+    position: relative;
+    z-index: 1;
+    border-left: 5px solid #E65100;
+    margin: 0 0 35px;
+    padding: 10px 0 10px 50px;
+    color: #E65100;
+    font-size: 220%;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.card .input-container {
+    position: relative;
+    margin: 0 60px 50px;
+}
+
+.card .input-container input {
+    outline: none;
+    z-index: 1;
+    position: relative;
+    background: none;
+    width: 100%;
+    height: 60px;
+    border: 0;
+    color: #212121;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.card .input-container .bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #757575;
+    width: 100%;
+    height: 1px;
+}
+
+.card .button-container {
+    margin: 0 60px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card .button-container button {
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+    background: 0;
+    width: 70%;
+    border: 2px solid #e3e3e3;
+    padding: 20px 0;
+    font-size: 180%;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+
+.card .button-container button:hover,
+.card .button-container button:active,
+.card .button-container button:focus {border-color: #E65100;}
+
+.card .forgot {
+    color: #d3d3d3;
+    font-size: 180%;
+    font-weight: 300;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card .forgot:hover {color: #bababa;}
+
+/* Left Side Card Styles */
+.info{
+    color: white;
+    background-color: #F57C00;
+}
+
+.info img{
+    display: block;
+    margin: 0 auto;
+}
+
+.info h1{
+    text-align: center;
+    font-size: 83%;
+    font-weight: 100;
+    text-transform: uppercase;
+    padding-left: 186px;
+    padding-top: 5px;
+}
+
+.info .para{
+    position: relative;
+    text-align: center;
+    font-size: 135%;
+    padding: 4%;
+    font-style: italic;
+    line-height: 145%;
+}
+
+.info .copy{
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 1094px){
+    .container{width: 100%;}
+}
+
+@media only screen and (min-width: 768px){
+    .eq{display: table;}
+    .col{
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .container{width: 100%;}
+    .card{width: 100%;}
+    .progress .bar{width: 1%;}
+    .progress #right{background-color: #fff;}
+}
+
+/* Animations */
+@-webkit-keyframes fade-in{
+    from{ opacity: 0;}
+    to{ opacity: 1;}
+}
+
+@keyframes fade-in{
+    from{ opacity: 0;}
+    to{ opacity: 1;}
+}
+@-webkit-keyframes slide-up{
+    from{ -webkit-transform: translateY(12px); transform: translateY(12px);}
+    to{ -webkit-transform: translateY(0); transform: translateY(0);}
+}
+@keyframes slide-up{
+    from{ -webkit-transform: translateY(12px); transform: translateY(12px);}
+    to{ -webkit-transform: translateY(0); transform: translateY(0);}
+}
+
+.animated{
+    -webkit-animation: slide-up 0.7s ease-in, fade-in 0.7s ease-in;
+    animation: slide-up 0.7s ease-in, fade-in 0.7s ease-in;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+}
+
