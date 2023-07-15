@@ -65,6 +65,17 @@ $usertype = $_SESSION["usertype"];
                     </a>
                 </li>
 
+                <li class="nav-tab" data-view-name="profile">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                        </svg>
+                        <span>
+            Gestion De Profile
+          </span>
+                    </a>
+                </li>
+
             <?php elseif ($usertype == "dric"): ?>
 
 
@@ -87,6 +98,17 @@ $usertype = $_SESSION["usertype"];
                         </svg>
                         <span>
             Justification
+          </span>
+                    </a>
+                </li>
+
+                <li class="nav-tab" data-view-name="profile">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                        </svg>
+                        <span>
+            Gestion De Profile
           </span>
                     </a>
                 </li>
@@ -127,6 +149,17 @@ $usertype = $_SESSION["usertype"];
           </span>
                     </a>
                 </li>
+
+                <li class="nav-tab" data-view-name="profile">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                        </svg>
+                        <span>
+            Gestion De Profile
+          </span>
+                    </a>
+                </li>
             <?php elseif ($usertype == "magasinier"): ?>
 
                 <li class="nav-tab" data-view-name="dm_magasin">
@@ -150,6 +183,18 @@ $usertype = $_SESSION["usertype"];
           </span>
                     </a>
                 </li>
+
+                <li class="nav-tab" data-view-name="profile">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                        </svg>
+                        <span>
+            Gestion De Profile
+          </span>
+                    </a>
+                </li>
+
             <?php elseif ($usertype == "super_admin"): ?>
                 <li class="nav-tab" data-view-name="create">
                     <a href="#">
@@ -224,15 +269,35 @@ $usertype = $_SESSION["usertype"];
             Justification
           </span>
                     </a>
-                </li>v
+                </li>
+
+                <li class="nav-tab" data-view-name="profile">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                        </svg>
+                        <span>
+            Gestion De Profile
+          </span>
+                    </a>
+                </li>
 
             <?php endif; ?>
 
+
+
+
             <li class="nav-tab" data-view-name="logout">
                 <a href="logout.php">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                    </svg>
                     <span>Déconnexion</span>
                 </a>
             </li>
+
+
         </ul>
     </div>
 
@@ -252,12 +317,29 @@ $usertype = $_SESSION["usertype"];
             <div class="valorisation" data-view-active="false">
                 <h1>etat</h1>
             </div>
+
+            <div class="profile" data-view-active="false">
+
+                <?php
+                require('profile.php');
+
+
+                ?>
+            </div>
         <?php elseif ($usertype == "dric"): ?>
             <div class="load" data-view-active="false">
                 <h1>Verifier les dm</h1>
             </div>
             <div class="justification" data-view-active="false">
                 <h1>justif</h1>
+            </div>
+            <div class="profile" data-view-active="false">
+
+                <?php
+                require('profile.php');
+
+
+                ?>
             </div>
 
         <?php elseif ($usertype == "dmi"): ?>
@@ -270,6 +352,14 @@ $usertype = $_SESSION["usertype"];
             <div class="outillage_dt" data-view-active="false">
                 <h1>outillage_dt</h1>
             </div>
+            <div class="profile" data-view-active="false">
+
+                <?php
+                require('profile.php');
+
+
+                ?>
+            </div>
 
         <?php elseif ($usertype == "magasinier"): ?>
             <div class="dm_magasin" data-view-active="false">
@@ -278,11 +368,20 @@ $usertype = $_SESSION["usertype"];
             <div class="stock_magasin" data-view-active="false">
                 <h1>stock_magasin</h1>
             </div>
+            <div class="profile" data-view-active="false">
+
+                <?php
+                require('profile.php');
+
+
+                ?>
+            </div>
 
 
         <?php elseif ($usertype == "super_admin"): ?>
             <div class="create" data-view-active="false">
-                <h1>CREATE users</h1>
+             <h2>hssss</h2>
+
             </div>
             <div class="stock_magasin" data-view-active="false">
                 <h1>stock_magasin</h1>
@@ -306,7 +405,15 @@ $usertype = $_SESSION["usertype"];
                 <h1>Verifier les dm</h1>
             </div>
             <div class="justification" data-view-active="false">
-                <h1>justif</h1>
+                <h1>dd</h1>
+            </div>
+            <div class="profile" data-view-active="false">
+
+                <?php
+                require('profile.php');
+
+
+                ?>
             </div>
         <?php endif; ?>
 

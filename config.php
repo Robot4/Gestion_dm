@@ -5,7 +5,6 @@ $user = "root";
 $password = "";
 $db = "gestion_dm";
 
-session_start();
 
 $data = mysqli_connect($host, $user, $password, $db);
 

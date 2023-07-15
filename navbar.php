@@ -32,30 +32,7 @@
         </nav>
     </div>
 
-    <?php
-    $current_page = basename($_SERVER['PHP_SELF']); // Get the current page filename
 
-    if (isset($_SESSION['username'])) {
-        echo '
-        <div class="header-right">
-            <div class="login-signup">';
-        if ($current_page !== 'rabat.php') { // Check if the current page is not "rabat.php"
-            echo '<a href="logout.php">Logout</a>';
-        }
-        echo '</div>
-        </div>';
-    } else {
-        // User is not logged in, display login button
-        echo '
-        <div class="header-right">
-            <div class="login-signup">';
-        if ($current_page !== 'login.php') { // Check if the current page is not login.php
-            echo '<a href="login.php">Login</a>';
-        }
-        echo '</div>
-        </div>';
-    }
-    ?>
 
     <div class="hamburger">
         <div></div>

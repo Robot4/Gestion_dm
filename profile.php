@@ -1,8 +1,7 @@
 <?php
 // profile.php
-require('navbar.php');
 
-session_start();
+
 
 // Check if the user is logged in
 if (!isset($_SESSION["username"])) {
@@ -70,64 +69,121 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Profile</title>
-    <style>
-        img.profile-image {
-            max-width: 200px;
-            max-height: 200px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/profile.css">
+
+
 </head>
 <body>
-<h1>User Profile</h1>
 
-<!-- Display success message -->
-<?php if ($successMessage !== ''): ?>
-    <p><?php echo $successMessage; ?></p>
-<?php endif; ?>
 
-<!-- Display current user information -->
-<h2>Welcome, <?php echo $_SESSION["username"]; ?></h2>
-<p>Email: <?php echo $row['email']; ?></p>
-<p>Nom: <?php echo $row['nom']; ?></p>
-<p>Prenom: <?php echo $row['prenom']; ?></p>
-<p>Matricule: <?php echo $row['matricule']; ?></p>
-<p>CIN: <?php echo $row['cin']; ?></p>
-<p>Telephone: <?php echo $row['telephone']; ?></p>
+<div class="user-container">
+    <?php if (!empty($row['profile_image'])): ?>
+        <img class="profile-image" src="<?php echo $row['profile_image']; ?>" alt="Profile Image">
+    <?php else: ?>
+        <img class="profile-image" src="profile_images/by_default.png" alt="Default Image">
+    <?php endif; ?>
+    <br>
+    <h2><?php echo $_SESSION["username"]; ?></h2>
+    <div class="user-info-form">
+        <p>Email: <?php echo $row['email']; ?></p>
+        <p>Nom: <?php echo $row['nom']; ?></p>
+        <p>Prenom: <?php echo $row['prenom']; ?></p>
+        <p>Matricule: <?php echo $row['matricule']; ?></p>
+        <p>CIN: <?php echo $row['cin']; ?></p>
+        <p>Telephone: <?php echo $row['telephone']; ?></p>
+    </div>
+</div>
 
-<!-- Display user profile image -->
-<?php if (!empty($row['profile_image'])): ?>
-    <img class="profile-image" src="<?php echo $row['profile_image']; ?>" alt="Profile Image">
-<?php endif; ?>
 
+
+<br><br><br><br><br><br>
 <!-- Form to update information and profile image -->
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+<center>
+    <div class="container">
+        <div class="header">
+            <h2>Modifier Vos Informations</h2>
+        </div>
+<form id="form" class="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+    <div class="form-control">
+
     <label>Email:</label>
-    <input type="email" name="email" value="<?php echo $row['email']; ?>"><br>
+    <input type="email" name="email" value="<?php echo $row['email']; ?>" readonly><br>
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+    </div>
 
+    <div class="form-control">
     <label>Nom:</label>
-    <input type="text" name="nom" value="<?php echo $row['nom']; ?>"><br>
+    <input type="text" name="nom" placeholder="Modifier Votre Nom"><br>
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+    </div>
 
+    <div class="form-control">
     <label>Prenom:</label>
-    <input type="text" name="prenom" value="<?php echo $row['prenom']; ?>"><br>
+    <input type="text" name="prenom" placeholder="Modifier Votre Prénom" ><br>
 
+    </div>
+
+    <div class="form-control">
     <label>Matricule:</label>
-    <input type="text" name="matricule" value="<?php echo $row['matricule']; ?>"><br>
+    <input type="text" name="matricule" placeholder="Modifier Votre Matricule" ><br>
 
+    </div>
+
+    <div class="form-control">
     <label>CIN:</label>
-    <input type="text" name="cin" value="<?php echo $row['cin']; ?>"><br>
+    <input type="text" name="cin" placeholder="Modifier Votre matricule"><br>
 
+    </div>
+
+    <div class="form-control">
     <label>Telephone:</label>
-    <input type="text" name="telephone" value="<?php echo $row['telephone']; ?>"><br>
+    <input type="text" name="telephone" placeholder="Modifier Votre Télé"><br>
 
+    </div>
+
+    <div class="form-control">
     <label>Profile Image:</label>
     <input type="file" name="profile_image"><br>
 
-    <input type="submit" value="Save">
-</form>
+    </div>
+    <input class="button" type="submit" value="Save">
 
+
+</form>
+    </div>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<center>
+    <div class="vertical-line"></div>
+
+</center>
+<script src="assets/js/panel.js"></script>
 
 </body>
 </html>
 
 
+    <!-- Display success message -->
+<?php if ($successMessage !== ''): ?>
+    <p><?php echo $successMessage; ?></p>
+<?php endif; ?>
