@@ -1,22 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 
-}
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    position: relative;
-}
 .Btn_add {
     width: fit-content;
     margin-bottom:20px;
-    background-color: #2bc48a;
+    background-color: #f0801b;
     padding: 5px 20px;
     color: #fff;
     display: flex;
@@ -47,7 +33,7 @@ td {
     text-align: center;
 
 }
-img {
+.icon {
     height: 25px;
 
 }
@@ -71,7 +57,7 @@ tr:nth-child(2n) td {
     flex-direction: column;
 }
 .back_btn {
-    color: #2bc48a;
+    color: #f0801b;
     text-decoration: 0;
     display: flex;
     align-items: center;
@@ -104,8 +90,8 @@ input:focus{
 }
 input[type="submit"]{
     margin-top: 25px;
-    background-color: #2bc48a;
-    border: 1px solid #2bc48a;
+    background-color: #f0801b;
+    border: 1px solid #f0801b;
     cursor: pointer;
     color: #fff;
     text-transform: uppercase;

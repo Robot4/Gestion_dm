@@ -7,7 +7,8 @@
     <title>Ajouter</title>
     <link rel="stylesheet" href="../assets/css/users.css">
 </head>
-<body>
+<body bgcolor="#d1d1d1">
+<center>
 <?php
 
          //connexion à la base de donnée
@@ -28,7 +29,7 @@
                //requête de modifi²cation
                $req = mysqli_query($data, "UPDATE users SET nom = '$nom' , prenom = '$prenom' , email = '$email', password = '$password', usertype = '$usertype' , matricule = '$matricule' , cin = '$cin'  , telephone = '$telephone' WHERE id = $id");
                 if($req){//si la requête a été effectuée avec succès , on fait une redirection
-                    header("location: ../users.php");
+                    header("location: ../rabat.php");
                 }else {//si non
                     $message = "Employé non modifié";
                 }
@@ -42,7 +43,7 @@
     ?>
 
     <div class="form">
-        <a href="../users.php" class="back_btn"><img src="../assets/images/back.png"> Retour</a>
+        <a href="../rabat.php" class="back_btn"><img src="../assets/images/back.png"> Retour</a>
         <h2>Modifier l'employé : <?=$row['nom']?> </h2>
         <p class="erreur_message">
            <?php
@@ -72,5 +73,6 @@
             <input type="submit" value="Modifier" name="button">
         </form>
     </div>
+</center>
 </body>
 </html>

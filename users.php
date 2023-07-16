@@ -8,8 +8,17 @@
     <link rel="stylesheet" href="assets/css/users.css">
 </head>
 <body>
-<div class="container">
-    <a href="fonctions/ajouter.php" class="Btn_add"> <img src="assets/images/plus.png"> Ajouter</a>
+<div class="containers">
+    <div class="button-container">
+        <a href="fonctions/ajouter.php" class="Btn_add">
+            <img class="icon" src="assets/images/plus.png"> Ajouter
+        </a>
+    </div>
+
+    <form action="" method="GET">
+        <input type="text" name="search" placeholder="Search...">
+        <input type="submit" value="Search">
+    </form>
 
     <table>
         <tr id="items">
@@ -24,30 +33,41 @@
             <th>Supprimer</th>
         </tr>
         <?php
-        session_start();
-
-        //inclure la page de connexion
+        // Include the database connection and other necessary files
         include_once "config.php";
-        //requête pour afficher la liste des employés
-        $req = mysqli_query($data , "SELECT * FROM users");
-        if(mysqli_num_rows($req) == 0){
-            //s'il n'existe pas d'employé dans la base de données, alors on affiche ce message :
-            echo "Il n'y a pas encore d'employé ajouté !" ;
+
+        // Check if a search query has been submitted
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            // Prepare the query to search for matching employees
+            $query = "SELECT * FROM users WHERE email LIKE '%$search%' OR nom LIKE '%$search%' OR cin LIKE '%$search%' OR username LIKE '%$search%'";
         } else {
-            //si non, affichons la liste de tous les employés
-            while($row = mysqli_fetch_assoc($req)){
+            // Query to fetch all employees
+            $query = "SELECT * FROM users";
+        }
+
+        // Execute the query
+        $result = mysqli_query($data, $query);
+
+        // Check if any employees are found
+        if (mysqli_num_rows($result) == 0) {
+            // Display a message if no employees are found
+            echo "No employees found.";
+        } else {
+            // Display the list of employees
+            while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <tr>
-                    <td><?=$row['nom']?></td>
-                    <td><?=$row['prenom']?></td>
-                    <td><?=$row['email']?></td>
-                    <td><?=$row['matricule']?></td>
-                    <td><?=$row['cin']?></td>
-                    <td><?=$row['telephone']?></td>
-                    <td><?=$row['usertype']?></td>
-                    <!--Nous allons mettre l'id de chaque employé dans ce lien -->
-                    <td><a href="./fonctions/modifier.php?id=<?=$row['id']?>"><img src="assets/images/pen.png"></a></td>
-                    <td><a href="./fonctions/supprimer.php?id=<?=$row['id']?>"><img src="assets/images/trash.png"></a></td>
+                    <td><?= $row['nom'] ?></td>
+                    <td><?= $row['prenom'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['matricule'] ?></td>
+                    <td><?= $row['cin'] ?></td>
+                    <td><?= $row['telephone'] ?></td>
+                    <td><?= $row['usertype'] ?></td>
+                    <!-- Links to modify and delete employees -->
+                    <td><a href="./fonctions/modifier.php?id=<?= $row['id'] ?>"><img class="icon" src="assets/images/pen.png"></a></td>
+                    <td><a href="./fonctions/supprimer.php?id=<?= $row['id'] ?>"><img class="icon" src="assets/images/trash.png"></a></td>
                 </tr>
                 <?php
             }

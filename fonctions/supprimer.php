@@ -6,5 +6,5 @@
   //requête de suppression
   $req = mysqli_query($data , "DELETE FROM users WHERE id = $id");
   //redirection vers la page index.php
-  header("Location:../users.php")
+  header("Location:../rabat.php")
 ?>

@@ -28,7 +28,7 @@ if(isset($_POST['button'])){
 
         if($result){
             // Redirect to the 'users.php' page if the query was successful
-            header("location: ../users.php");
+            header("location: ../rabat.php");
             exit();
         } else {
             // Display an error message if the query failed
@@ -41,7 +41,7 @@ if(isset($_POST['button'])){
 }
 ?>
 <div class="form">
-    <a href="../users.php" class="back_btn"><img src="../assets/images/back.png"> Retour</a>
+    <a href="../rabat.php" class="back_btn"><img src="../assets/images/back.png"> Retour</a>
     <h2>Ajouter un employé</h2>
     <p class="erreur_message">
         <?php

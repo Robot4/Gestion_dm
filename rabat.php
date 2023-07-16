@@ -379,8 +379,12 @@ $usertype = $_SESSION["usertype"];
 
 
         <?php elseif ($usertype == "super_admin"): ?>
-            <div class="create" data-view-active="false">
-             <h2>hssss</h2>
+            <div class="create" data-view-active="true">
+                <?php
+                require('users.php');
+
+
+                ?>
 
             </div>
             <div class="stock_magasin" data-view-active="false">
