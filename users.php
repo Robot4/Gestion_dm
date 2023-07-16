@@ -29,6 +29,8 @@
             <th>CIN</th>
             <th>Téléphone</th>
             <th>Type d'utilisateur</th>
+            <th>Dric</th>
+            <th>District</th>
             <th>Modifier</th>
             <th>Supprimer</th>
         </tr>
@@ -52,7 +54,7 @@
         // Check if any employees are found
         if (mysqli_num_rows($result) == 0) {
             // Display a message if no employees are found
-            echo "No employees found.";
+            echo "<center> <h1 style='color: black'>Aucun employé trouvé</h1></center>";
         } else {
             // Display the list of employees
             while ($row = mysqli_fetch_assoc($result)) {
@@ -65,6 +67,8 @@
                     <td><?= $row['cin'] ?></td>
                     <td><?= $row['telephone'] ?></td>
                     <td><?= $row['usertype'] ?></td>
+                    <td><?= $row['dric'] ?></td>
+                    <td><?= $row['district'] ?></td>
                     <!-- Links to modify and delete employees -->
                     <td><a href="./fonctions/modifier.php?id=<?= $row['id'] ?>"><img class="icon" src="assets/images/pen.png"></a></td>
                     <td><a href="./fonctions/supprimer.php?id=<?= $row['id'] ?>"><img class="icon" src="assets/images/trash.png"></a></td>

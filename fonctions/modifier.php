@@ -25,9 +25,9 @@
            //extraction des informations envoyé dans des variables par la methode POST
            extract($_POST);
            //verifier que tous les champs ont été remplis
-           if(isset($nom) && isset($prenom) && $email && $matricule && $cin && $telephone){
+           if(isset($nom) && isset($prenom) && $email && $matricule && $cin && $telephone && $dric && $district){
                //requête de modifi²cation
-               $req = mysqli_query($data, "UPDATE users SET nom = '$nom' , prenom = '$prenom' , email = '$email', password = '$password', usertype = '$usertype' , matricule = '$matricule' , cin = '$cin'  , telephone = '$telephone' WHERE id = $id");
+               $req = mysqli_query($data, "UPDATE users SET nom = '$nom' , prenom = '$prenom' , email = '$email', password = '$password', usertype = '$usertype' , matricule = '$matricule' , cin = '$cin'  , telephone = '$telephone', dric = '$dric', district = '$district' WHERE id = $id");
                 if($req){//si la requête a été effectuée avec succès , on fait une redirection
                     header("location: ../rabat.php");
                 }else {//si non
@@ -69,6 +69,11 @@
             <input type="text" name="cin" value="<?=$row['cin']?>">
             <label>Telephone</label>
             <input type="text" name="telephone" value="<?=$row['telephone']?>">
+            <label>Dric</label>
+            <input type="text" name="dric" value="<?=$row['dric']?>">
+            
+            <label>District</label>
+            <input type="text" name="district" value="<?=$row['district']?>">
 
             <input type="submit" value="Modifier" name="button">
         </form>
