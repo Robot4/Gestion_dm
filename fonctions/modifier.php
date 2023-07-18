@@ -71,7 +71,7 @@
             <input type="text" name="telephone" value="<?=$row['telephone']?>">
             <label>Dric</label>
             <input type="text" name="dric" value="<?=$row['dric']?>">
-            
+
             <label>District</label>
             <input type="text" name="district" value="<?=$row['district']?>">
 
