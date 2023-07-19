@@ -180,7 +180,8 @@
                     <td>${quantite}</td>
                     <td>${project}</td>
                     <td><button class="delete-button" onclick="deleteOrderForm(this)">Supprimer</button></td>
-                `;
+                    <td><button class="envoyer-button" onclick="envoyerDemande(this)">Envoyer la demande</button></td>
+            `;
             document.getElementById('order-table-body').appendChild(newRow);
 
             calculatePrixTotal();
@@ -216,6 +217,37 @@
 
         prixTotal = total;
         document.getElementById('prix-total').textContent = prixTotal.toFixed(2);
+    }
+
+    function envoyerDemande(button) {
+        var row = button.parentNode.parentNode;
+        var nomenclature = row.querySelector('td:nth-child(1)').textContent;
+        var designation = row.querySelector('td:nth-child(2)').textContent;
+        var prixUnitaire = row.querySelector('td:nth-child(3)').textContent;
+        var quantite = row.querySelector('td:nth-child(4)').textContent;
+        var project = row.querySelector('td:nth-child(5)').textContent;
+
+        // Create a data object to send to the server-side script
+        var data = {
+            nomenclature: nomenclature,
+            designation: designation,
+            prixUnitaire: prixUnitaire,
+            quantite: quantite,
+            projet: project // Update this to "projet"
+        };
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Handle the server's response here (if needed)
+                console.log(this.responseText);
+            }
+        };
+
+        // Replace 'send_order.php' with the URL of your server-side script
+        xhttp.open('POST', 'send_order.php', true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(data));
     }
 
     // Call calculatePrixTotal initially to display the initial Prix Total value
