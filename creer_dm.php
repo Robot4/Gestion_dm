@@ -52,6 +52,9 @@
     <tr>
         <th colspan="5">Prix Total:</th>
         <th id="prix-total" class="prix-total">0.00</th>
+        <th>
+            <button class="envoyer-button" onclick="envoyerDemandes()">Envoyer la demande</button>
+        </th>
     </tr>
     </tfoot>
 </table>
@@ -91,6 +94,8 @@
 <script>
     var orderFormCounter = 1;
     var prixTotal = 0;
+    var ordersArray = []; // Array to store added orders
+
 
 
     function fetchSuggestions(keyword) {
@@ -164,6 +169,7 @@
         document.getElementById('order-prix_unitaire-' + formId).readOnly = true;
     }
 
+
     function addOrderForm() {
         var nomenclature = document.getElementById('n_nomenclature').value;
         var designation = document.getElementById('designation').value;
@@ -174,17 +180,20 @@
         if (nomenclature && designation && prixUnitaire && quantite && project) {
             var newRow = document.createElement('tr');
             newRow.innerHTML = `
-                    <td>${nomenclature}</td>
-                    <td>${designation}</td>
-                    <td>${prixUnitaire}</td>
-                    <td>${quantite}</td>
-                    <td>${project}</td>
-                    <td><button class="delete-button" onclick="deleteOrderForm(this)">Supprimer</button></td>
-                    <td><button class="envoyer-button" onclick="envoyerDemande(this)">Envoyer la demande</button></td>
-            `;
+            <td>${nomenclature}</td>
+            <td>${designation}</td>
+            <td>${prixUnitaire}</td>
+            <td>${quantite}</td>
+            <td>${project}</td>
+            <td><button class="delete-button" onclick="deleteOrderForm(this)">Supprimer</button></td>
+        `;
+
             document.getElementById('order-table-body').appendChild(newRow);
 
-            calculatePrixTotal();
+            // Update the Prix Total
+            var total = (parseFloat(prixUnitaire) * parseInt(quantite)) || 0;
+            prixTotal += total;
+            document.getElementById('prix-total').textContent = prixTotal.toFixed(2);
         }
 
         // Reset the form fields
@@ -194,6 +203,7 @@
         document.getElementById('quantite').value = '';
         document.getElementById('project').value = '';
     }
+
 
     function deleteOrderForm(button) {
         var row = button.parentNode.parentNode;
@@ -219,36 +229,52 @@
         document.getElementById('prix-total').textContent = prixTotal.toFixed(2);
     }
 
-    function envoyerDemande(button) {
-        var row = button.parentNode.parentNode;
-        var nomenclature = row.querySelector('td:nth-child(1)').textContent;
-        var designation = row.querySelector('td:nth-child(2)').textContent;
-        var prixUnitaire = row.querySelector('td:nth-child(3)').textContent;
-        var quantite = row.querySelector('td:nth-child(4)').textContent;
-        var project = row.querySelector('td:nth-child(5)').textContent;
+    function envoyerDemandes() {
+        // Create an array to store all the orders data
+        var orders = [];
 
-        // Create a data object to send to the server-side script
-        var data = {
-            nomenclature: nomenclature,
-            designation: designation,
-            prixUnitaire: prixUnitaire,
-            quantite: quantite,
-            projet: project // Update this to "projet"
-        };
+        // Get all the rows in the order table body
+        var rows = document.querySelectorAll('#order-table-body tr');
 
+        // Loop through each row and extract the data for each order
+        rows.forEach(function (row) {
+            var nomenclature = row.querySelector('td:nth-child(1)').textContent;
+            var designation = row.querySelector('td:nth-child(2)').textContent;
+            var prixUnitaire = row.querySelector('td:nth-child(3)').textContent;
+            var quantite = row.querySelector('td:nth-child(4)').textContent;
+            var project = row.querySelector('td:nth-child(5)').textContent;
+
+            // Create an object to represent the order
+            var order = {
+                nomenclature: nomenclature,
+                designation: designation,
+                prixUnitaire: prixUnitaire,
+                quantite: quantite,
+                project: project
+            };
+
+            // Add the order object to the orders array
+            orders.push(order);
+        });
+
+        // Now you have all the orders data in the "orders" array
+        // You can send this array to the server using XMLHttpRequest or fetch API
+
+        // Example using XMLHttpRequest:
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+        xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 // Handle the server's response here (if needed)
                 console.log(this.responseText);
             }
         };
 
-        // Replace 'send_order.php' with the URL of your server-side script
+        // Replace 'send_orders.php' with the URL of your server-side script
         xhttp.open('POST', 'send_order.php', true);
         xhttp.setRequestHeader('Content-Type', 'application/json');
-        xhttp.send(JSON.stringify(data));
+        xhttp.send(JSON.stringify({ orders: orders }));
     }
+
 
     // Call calculatePrixTotal initially to display the initial Prix Total value
     calculatePrixTotal();
