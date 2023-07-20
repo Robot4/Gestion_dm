@@ -1,11 +1,10 @@
 <?php
+// Assume you have PHP code to retrieve the username and district from the session or database
+// For example, using session variables
 require('rabat.php');
 
 
-if(!isset($_SESSION["username"]))
-{
-    header("location:login.php");
-}
+
 ?>
 
 <!DOCTYPE html>

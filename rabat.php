@@ -305,7 +305,12 @@ $usertype = $_SESSION["usertype"];
         <!-- Content based on user type -->
         <?php if ($usertype == "user"): ?>
             <div class="Gestion_DM" data-view-active="true">
-                <h1>Gestion de DM</h1>
+                <?php
+                require('creer_dm.php');
+
+
+                ?>
+
             </div>
 
             <div class="Gestion_Stock" data-view-active="false">
