@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row !== null) {
             $_SESSION["username"] = $row["username"]; // Store the username in the session
             $_SESSION["usertype"] = $row["usertype"]; // Store the usertype in the session
+            $_SESSION["district"] = $row["district"]; // Store the district in the session
+
 
             if ($remember) {
                 // Generate a long-lived session token
@@ -76,6 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error in database query";
     }
+
+
 }
 ?>
 
