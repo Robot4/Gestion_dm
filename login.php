@@ -115,8 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="checkbox-container animated">
                     <input type="checkbox" id="Remember" name="remember"/>
-                    <label for="Remember" >Se souvenir de moi</label>
+                    <label class="remember" for="Remember" >Se souvenir de moi</label>
                 </div>
+                <br>
                 <div class="button-container animated">
                     <button type="submit">Se connecter</button>
                 </div>

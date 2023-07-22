@@ -30,6 +30,15 @@ $usertype = $_SESSION["usertype"];
                     </a>
                 </li>
 
+                <li class="nav-tab" data-view-name="etat_DM">
+                    <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                            <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+                        </svg>
+                        <span>Etat Demande Materiel</span>
+                    </a>
+                </li>
+
                 <li class="nav-tab" data-view-name="Gestion_Stock">
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-gear-fill" viewBox="0 0 16 16">
@@ -312,6 +321,9 @@ $usertype = $_SESSION["usertype"];
                 ?>
 
             </div>
+            <div class="etat_DM" data-view-active="false">
+                <h1>etat dm</h1>
+            </div>
 
             <div class="Gestion_Stock" data-view-active="false">
                 <h1>Gestion de Stock</h1>
@@ -332,8 +344,13 @@ $usertype = $_SESSION["usertype"];
                 ?>
             </div>
         <?php elseif ($usertype == "dric"): ?>
-            <div class="load" data-view-active="false">
-                <h1>Verifier les dm</h1>
+            <div class="load" data-view-active="true">
+                <?php
+                require('verification_dric.php');
+
+
+                ?>
+
             </div>
             <div class="justification" data-view-active="false">
                 <h1>justif</h1>
@@ -349,7 +366,12 @@ $usertype = $_SESSION["usertype"];
 
         <?php elseif ($usertype == "dmi"): ?>
             <div class="DM" data-view-active="false">
-                <h1>Verifier les dm</h1>
+                <?php
+                require('dmi_dm.php');
+
+
+                ?>
+
             </div>
             <div class="stock_dt" data-view-active="false">
                 <h1>tous stock_dt</h1>

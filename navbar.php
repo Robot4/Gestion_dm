@@ -15,7 +15,7 @@
             </a>
         </div>
         <nav>
-            <ul>
+            <ul id="menu">
                 <li>
                     <a href="index.php" class="active">Accueil</a>
                 </li>
@@ -32,8 +32,6 @@
         </nav>
     </div>
 
-
-
     <div class="hamburger">
         <div></div>
         <div></div>
@@ -46,6 +44,16 @@
     const nav = document.querySelector("nav");
     hamburger.onclick = function() {
         nav.classList.toggle("active");
+    }
+
+    // Get the current page URL
+    const currentPageURL = window.location.pathname;
+
+    // Check if the current page is "login.php"
+    if (currentPageURL.includes("login.php")) {
+        // Hide the content in the <ul> element
+        const menu = document.getElementById("menu");
+        menu.style.display = "none";
     }
 </script>
 

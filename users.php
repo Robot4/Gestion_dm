@@ -15,8 +15,9 @@
         </a>
     </div>
 
-    <form action="" method="GET">
+    <form  action="" method="GET">
         <input type="text" name="search" placeholder="Search...">
+
         <input type="submit" value="Search">
     </form>
 
