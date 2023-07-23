@@ -22,26 +22,36 @@ function executeQuery($query)
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['n_dm']) && isset($_POST['operation']) && isset($_POST['quantite_maintenu']) && isset($_POST['date_envoie'])) {
+    if (isset($_POST['n_dm']) && isset($_POST['operation']) && isset($_POST['quantite_maintenu'])) {
         $n_dm = mysqli_real_escape_string($conn, $_POST['n_dm']);
         $operation = mysqli_real_escape_string($conn, $_POST['operation']);
         $quantiteMaintenu = mysqli_real_escape_string($conn, $_POST['quantite_maintenu']);
-        $dateEnvoie = mysqli_real_escape_string($conn, $_POST['date_envoie']);
 
-        // Update the specified columns for the specific row in the dm table
-        $updateQuery = "UPDATE dmi SET operation = '$operation', quantite_maintenu = '$quantiteMaintenu', date_envoie = '$dateEnvoie' WHERE n_dm = '$n_dm'";
-        $result = executeQuery($updateQuery);
+        // Insert data into the "magasin" table
+        $insertQuery = "INSERT INTO magasin (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie) SELECT username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, '$operation', '$quantiteMaintenu', NOW() FROM dmi WHERE n_dm = '$n_dm'";
+
+        $result = executeQuery($insertQuery);
 
         if ($result === TRUE) {
-            // The update was successful
-            echo "Update successful.";
+            // The insert was successful
+            echo "La Dm Inséré Au Magasinier";
+
+            // Now, delete the data from the 'dmi' table
+            $deleteQuery = "DELETE FROM dmi WHERE n_dm = '$n_dm'";
+            $deleteResult = executeQuery($deleteQuery);
+
+            if ($deleteResult === TRUE) {
+                echo " .";
+            } else {
+                echo "Error deleting data from 'dmi' table: " . $conn->error;
+            }
         } else {
-            // Failed to update
-            echo "Error updating data: " . $conn->error;
+            // Failed to insert
+            echo "Error inserting data: " . $conn->error;
         }
     } else {
         // Missing parameters
-        echo "Missing parameters for update.";
+        echo "Paramètres manquants pour la mise à jour.";
     }
 }
 

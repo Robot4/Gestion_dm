@@ -12,10 +12,54 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        .envoyer-btn{
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            display: inline-block;
+            font-size: 1em;
+            padding: 1em 2em;
+            margin-top: 14px;
+            margin-bottom: 28px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #338f33d6, #3df93d);
+            border-radius: 17px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: transform cubic-bezier(0, 0, 0, 0.79) 0.1s, box-shadow ease-in 0.25s;
+            box-shadow: 0 -6px 12px rgb(30 26 28 / 50%);
+
+        }
+        .anuler-btn{
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            display: inline-block;
+            font-size: 1em;
+            padding: 1em 2em;
+            margin-top: 14px;
+            margin-bottom: 28px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #df8585d6, #a70000);
+            border-radius: 17px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: transform cubic-bezier(0, 0, 0, 0.79) 0.1s, box-shadow ease-in 0.25s;
+            box-shadow: 0 -6px 12px rgb(30 26 28 / 50%);
+
+        }
+        .here{
+
+            margin-bottom: 1000px;
+            margin-left: -137px;
+        }
+
     </style>
 </head>
 
 <body>
+
 <?php
 // ... Previous code for database connection ...
 // Step 1: Replace these values with your actual database credentials
@@ -126,7 +170,8 @@ if (isset($_GET['search'])) {
             // Decision column with buttons
             echo '<td>';
             echo '<button class="envoyer-btn" data-n_dm="' . $row["n_dm"] . '">Envoyer</button>';
-            echo '<button>Annuler</button>';
+            echo '<br>';
+            echo '<button class="anuler-btn">Annuler</button>';
             echo '</td>';
             echo "</tr>";
         }
@@ -144,10 +189,7 @@ $conn->close();
 ?>
 
 <!-- Display the search bar after the table -->
-<form class="here" method="GET" action="">
-    <input type="text" name="search" placeholder="Search...">
-    <input type="submit" value="Search">
-</form>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -178,6 +220,10 @@ $conn->close();
         });
     });
 </script>
+<form class="here" method="GET" action="">
+    <input type="text" name="search" placeholder="Search...">
+    <input type="submit" value="Search">
+</form>
 </body>
 
 </html>

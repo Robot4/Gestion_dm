@@ -322,11 +322,17 @@ $usertype = $_SESSION["usertype"];
 
             </div>
             <div class="etat_DM" data-view-active="false">
-                <h1>etat dm</h1>
+
+
             </div>
 
             <div class="Gestion_Stock" data-view-active="false">
-                <h1>Gestion de Stock</h1>
+                <?php
+                require('etat_dm.php');
+
+
+                ?>
+
             </div>
             <div class="Gestion_outillage" data-view-active="false">
                 <h1>Gestion_outillage</h1>
@@ -365,7 +371,7 @@ $usertype = $_SESSION["usertype"];
             </div>
 
         <?php elseif ($usertype == "dmi"): ?>
-            <div class="DM" data-view-active="false">
+            <div class="DM" data-view-active="true">
                 <?php
                 require('dmi_dm.php');
 
@@ -389,8 +395,13 @@ $usertype = $_SESSION["usertype"];
             </div>
 
         <?php elseif ($usertype == "magasinier"): ?>
-            <div class="dm_magasin" data-view-active="false">
-                <h1>dm_magasin</h1>
+            <div class="dm_magasin" data-view-active="true">
+                <?php
+                require('magasinier_dm.php');
+
+
+                ?>
+
             </div>
             <div class="stock_magasin" data-view-active="false">
                 <h1>stock_magasin</h1>

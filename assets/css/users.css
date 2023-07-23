@@ -27,10 +27,11 @@ th {
     font-weight: 500;
 }
 td {
-    font-weight: 400;
     padding: 5px 30px;
     font-size: 14px;
     text-align: center;
+    font-weight: bolder;
+
 
 }
 .icon {
@@ -103,3 +104,4 @@ form.here{
 
 
 }
+
