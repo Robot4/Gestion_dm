@@ -17,7 +17,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 50px;
-    background: #0b2239;
+    background: #353333;
 }
 header .header-left {
     display: flex;
@@ -57,9 +57,20 @@ header .login-signup {
 header .login-signup a {
     display: inline-block;
     color: #0b2239;
-    background: #f1811b;
+    background: #ffffff;
     padding: 5px 12px;
     border-radius: 5px;
+}
+.btn{
+    display: inline-block;
+    color: #0b2239;
+    background: #ffffff;
+    padding: 12px 78px;
+    border-radius: 16px;
+    font-weight: bold;
+    margin-top: 100px;
+
+
 }
 header .header-right .hamburger {
     margin-left: 20px;

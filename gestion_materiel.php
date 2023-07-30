@@ -1,11 +1,61 @@
+<?php
+require('navbar.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Material Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<style>
+    .icon {
+        height: 24px
 
+    }
+
+    .Btn_add {
+        width: fit-content;
+        margin-bottom: 81px;
+        background-color: #f0801b;
+        padding: 7px 29px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        text-align: 0;
+        border-radius: 18px;
+        text-decoration: 0;
+    }
+    input{
+        padding: 3px;
+        border: 1px solid #353333;
+        outline: 0;
+        margin-top: 22px;
+        margin-left: 9px;
+    }
+    input:focus{
+        border: 1px solid #ffcb61;
+    }
+    input[type="submit"]{
+        margin-top: 25px;
+        background-color: #f0801b;
+        border: 1px solid #f0801b;
+        cursor: pointer;
+        color: #fff;
+        text-transform: uppercase;
+    }
+</style>
 </head>
 <body>
+
+
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <input type="text" name="search_term" >
+    <input type="submit" name="search" value="Search">
+</form>
 
 <?php
 // Database credentials
@@ -115,8 +165,8 @@ if (isset($_POST['delete_material'])) {
 }
 ?>
 
-<h2>Material List</h2>
-<table border="1">
+<center><h2>Liste de matériel</h2></center>
+<table border="1" class="table table-hover">
     <tr>
         <th>Nomenclature</th>
         <th>Designation</th>
@@ -130,7 +180,7 @@ if (isset($_POST['delete_material'])) {
         echo "<td>" . $material["designation"] . "</td>";
         echo "<td>" . $material["prix_unitaire"] . "</td>";
         echo '<td>';
-        echo '<a href="javascript:void(0);" onclick="deleteMaterial(\'' . $material["n_nomenclature"] . '\')"><i class="fas fa-trash"></i> Delete</a>';
+        echo '<a href="javascript:void(0);" onclick="deleteMaterial(\'' . $material["n_nomenclature"] . '\')"><i class="fas fa-trash"></i> Supprimer</a>';
         echo '</td>';
         echo "</tr>";
     }
@@ -144,15 +194,15 @@ $next_page = $page + 1;
 ?>
 <div>
     <?php if ($prev_page > 0): ?>
-        <a href="?page=<?php echo $prev_page; ?>">Previous</a>
+        <a href="?page=<?php echo $prev_page; ?>">Précédent</a>
     <?php endif; ?>
 
     <?php if (count($materials) == $limit): ?>
-        <a href="?page=<?php echo $next_page; ?>">Next</a>
+        <a href="?page=<?php echo $next_page; ?>">suivant</a>
     <?php endif; ?>
 </div>
-
-<h2>Add Material</h2>
+<center>
+<h2>Ajouter Material</h2>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     Nomenclature: <input type="text" name="n_nomenclature" required><br>
     Designation: <input type="text" name="designation" required><br>
@@ -160,18 +210,15 @@ $next_page = $page + 1;
     <input type="submit" name="add_material" value="Add Material">
 </form>
 
+</center>
 
 
-<h2>Search Material</h2>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    Search by Nomenclature or Designation: <input type="text" name="search_term" >
-    <input type="submit" name="search" value="Search">
-</form>
+
 
 <!-- JavaScript function for delete confirmation -->
 <script>
     function deleteMaterial(n_nomenclature) {
-        if (confirm("Are you sure you want to delete this material?")) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce matériel?")) {
             // Submit the form to delete the material
             var form = document.createElement("form");
             form.setAttribute("method", "post");
@@ -195,6 +242,15 @@ $next_page = $page + 1;
         }
     }
 </script>
+
+<br>
+
+<div class="containers">
+    <div class="button-container">
+        <a href="admin.php" class="Btn_add">
+            <img class="icon" src="assets/images/left.svg"> retour
+        </a>
+    </div>
 
 </body>
 </html>

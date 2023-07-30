@@ -138,6 +138,7 @@ $conn->close();
 
 <head>
     <link rel="stylesheet" href="assets/css/users.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         .envoyer-btn {

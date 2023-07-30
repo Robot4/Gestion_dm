@@ -12,6 +12,8 @@ $usertype = $_SESSION["usertype"];
 
 <head>
     <link rel="stylesheet" href="assets/css/dash.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <main>
@@ -35,7 +37,7 @@ $usertype = $_SESSION["usertype"];
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
                             <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
                         </svg>
-                        <span>Etat Demande Materiel</span>
+                        <span>Justification DM </span>
                     </a>
                 </li>
 
@@ -205,80 +207,22 @@ $usertype = $_SESSION["usertype"];
                 </li>
 
             <?php elseif ($usertype == "super_admin"): ?>
-                <li class="nav-tab" data-view-name="create">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z"/>
-                        </svg>
-                        <span>
-            Gestion d'utilisateurs
-          </span>
-                    </a>
-                </li>
-                <li class="nav-tab" data-view-name="dm_magasin">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-inboxes" viewBox="0 0 16 16">
-                            <path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562A.5.5 0 0 0 1.884 9h12.234a.5.5 0 0 0 .496-.438L14.933 6zM3.809.563A1.5 1.5 0 0 1 4.981 0h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393zm.941.83.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438l.32-2.562H10.45a2.5 2.5 0 0 1-4.9 0H1.066z"/>
-                        </svg>
-                        <span>
-            Demande Matériel
-          </span>
-                    </a>
-                </li>
 
-                <li class="nav-tab" data-view-name="stock_magasin">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z"/>
-                        </svg>
-                        <span>
-            Stock Matériel
-          </span>
-                    </a>
-                </li>
-                <li class="nav-tab" data-view-name="stock_dt">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses-fill" viewBox="0 0 16 16">
-                            <path d="M7.207 1a1 1 0 0 0-1.414 0L.146 6.646a.5.5 0 0 0 .708.708L1 7.207V12.5A1.5 1.5 0 0 0 2.5 14h.55a2.51 2.51 0 0 1-.05-.5V9.415a1.5 1.5 0 0 1-.56-2.475l5.353-5.354L7.207 1Z"/>
-                            <path d="M8.793 2a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Z"/>
-                        </svg>
-                        <span>
-            Stock District
-          </span>
-                    </a>
-                </li>
-                <li class="nav-tab" data-view-name="outillage_dt">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench" viewBox="0 0 16 16">
-                            <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"/>
-                        </svg>
-                        <span>
-            Stock outillage
-          </span>
-                    </a>
-                </li>
-                <li class="nav-tab" data-view-name="load">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
-                            <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
-                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
-                        </svg>
-                        <span>
-            Verification
-          </span>
-                    </a>
-                </li>
 
-                <li class="nav-tab" data-view-name="justification">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                        <span>
-            Justification
-          </span>
-                    </a>
-                </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <li class="nav-tab" data-view-name="profile">
                     <a href="#">
@@ -288,6 +232,15 @@ $usertype = $_SESSION["usertype"];
                         <span>
             Gestion De Profile
           </span>
+                    </a>
+                </li>
+
+                <li class="nav-tab" data-view-name="logout">
+                    <a href="admin.php">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                            <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                        </svg>
+                        <span>Retourner</span>
                     </a>
                 </li>
 
@@ -322,7 +275,11 @@ $usertype = $_SESSION["usertype"];
 
             </div>
             <div class="etat_DM" data-view-active="false">
+                <?php
+                require('dm_justification.php');
 
+
+                ?>
 
             </div>
 
@@ -359,7 +316,12 @@ $usertype = $_SESSION["usertype"];
 
             </div>
             <div class="justification" data-view-active="false">
-                <h1>justif</h1>
+
+                <?php
+                require('dric_justification.php');
+
+
+                ?>
             </div>
             <div class="profile" data-view-active="false">
 
@@ -417,39 +379,10 @@ $usertype = $_SESSION["usertype"];
 
 
         <?php elseif ($usertype == "super_admin"): ?>
-            <div class="create" data-view-active="true">
-                <?php
-                require('users.php');
 
 
-                ?>
 
-            </div>
-            <div class="stock_magasin" data-view-active="false">
-                <h1>stock_magasin</h1>
-            </div>
-            <div class="dm_magasin" data-view-active="false">
-                <h1>dm_magasin</h1>
-            </div>
-            <div class="outillage_dt" data-view-active="false">
-                <h1>outillage_dt</h1>
-            </div>
-            <div class="stock_dt" data-view-active="false">
-                <h1>tous stock_dt</h1>
-            </div>
-            <div class="DM" data-view-active="false">
-                <h1>Verifier les dm</h1>
-            </div>
-            <div class="valorisation" data-view-active="false">
-                <h1>etat</h1>
-            </div>
-            <div class="load" data-view-active="false">
-                <h1>Verifier les dm</h1>
-            </div>
-            <div class="justification" data-view-active="false">
-                <h1>dd</h1>
-            </div>
-            <div class="profile" data-view-active="false">
+            <div class="profile" data-view-active="true">
 
                 <?php
                 require('profile.php');

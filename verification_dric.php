@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="assets/css/users.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         /* Limit the width of the "Designation" column and add ellipsis for overflow */
@@ -171,7 +172,8 @@ if (isset($_GET['search'])) {
             echo '<td>';
             echo '<button class="envoyer-btn" data-n_dm="' . $row["n_dm"] . '">Envoyer</button>';
             echo '<br>';
-            echo '<button class="anuler-btn">Annuler</button>';
+            echo '<button class="anuller-btn" data-n_dm="' . $row["n_dm"] . '">Annuler</button>';
+
             echo '</td>';
             echo "</tr>";
         }
@@ -205,6 +207,33 @@ $conn->close();
             $.ajax({
                 type: "POST",
                 url: "verification_server.php",
+                data: {
+                    n_dm: n_dm
+                },
+                success: function (response) {
+                    // Update the table dynamically by removing the row for the successful n_dm value
+                    clickedRow.remove();
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error(error);
+                },
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $(".anuller-btn").click(function () {
+            // Get the n_dm value from the data attribute of the clicked button
+            const n_dm = $(this).data("n_dm");
+
+            // Store the reference to the current row to remove it later
+            const clickedRow = $(this).closest("tr");
+
+            // Send the n_dm value to the server using AJAX
+            $.ajax({
+                type: "POST",
+                url: "justification_server.php",
                 data: {
                     n_dm: n_dm
                 },

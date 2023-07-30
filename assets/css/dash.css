@@ -19,12 +19,12 @@ main {
     position: fixed;
     width: 17rem;
     min-height: 100%;
-    background-color: #0b2138;
+    background-color: #353333;
 }
 
 .side-bar .logo-top {
     padding: 1em;
-    background-color: #0b2138;
+    background-color: #353333;
 }
 
 .side-bar .logo-top img {

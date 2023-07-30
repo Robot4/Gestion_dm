@@ -3,6 +3,7 @@
 <head>
     <title>User Data</title>
     <link rel="stylesheet" href="assets/css/users.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
@@ -52,7 +53,7 @@ if (isset($_SESSION['username'])) {
         echo "<th>n_nomenclature</th>";
         echo "<th>Designation</th>";
         echo "<th>Prix Total</th>";
-        echo "<th>Quantite Maintenu</th>";
+        echo "<th>Quantite </th>";
         echo "<th>Date Envoie</th>";
         echo "</tr>";
 
@@ -71,7 +72,7 @@ if (isset($_SESSION['username'])) {
 
         echo "</table>";
     } else {
-        echo "No data found for the specified username.";
+        echo "votre stock est vide.";
     }
 } else {
     echo "User not logged in."; // Add appropriate handling if the user is not logged in

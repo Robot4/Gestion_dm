@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {
-            background-image: url('assets/images/bg.jpg');
+            background-image: url('assets/images/index.png');
             background-repeat: no-repeat;
             background-size: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
         }
     </style>
 </head>
@@ -23,25 +27,13 @@
         </div>
         <nav>
             <ul>
-                <li>
-                    <a href="">Products</a>
-                </li>
-                <li>
-                    <a href="">Pricing</a>
-                </li>
-                <li>
-                    <a href="">About</a>
-                </li>
+
             </ul>
-            <div class="login-signup">
-                <a href="login.php">Login</a>
-            </div>
+
         </nav>
     </div>
     <div class="header-right">
-        <div class="login-signup">
-            <a href="login.php">Login</a>
-        </div>
+
         <div class="hamburger">
             <div></div>
             <div></div>
@@ -49,6 +41,29 @@
         </div>
     </div>
 </header>
+
+
+<center>
+
+
+<div class="btn">
+
+    <a href="login.php">LOGIN</a>
+</div>
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
     hamburger = document.querySelector(".hamburger");
     nav = document.querySelector("nav");

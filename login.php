@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: dric.php");
                 exit();
             } elseif ($row["usertype"] == "super_admin") {
-                header("Location: rabat.php");
+                header("Location: admin.php");
                 exit();
             }
             elseif ($row["usertype"] == "dmi") {
@@ -87,6 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>ONCF-CONNECT</title>
     <link rel="stylesheet" href="assets/css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>

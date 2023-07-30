@@ -16,18 +16,7 @@
         </div>
         <nav>
             <ul id="menu">
-                <li>
-                    <a href="index.php" class="active">Accueil</a>
-                </li>
-                <li>
-                    <a href="creer_dm.php">add</a>
-                </li>
-                <li>
-                    <a href="">Pricing</a>
-                </li>
-                <li>
-                    <a href="">About</a>
-                </li>
+
             </ul>
         </nav>
     </div>
