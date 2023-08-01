@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Data</title>
     <link rel="stylesheet" href="assets/css/users.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <style>
+        .envoyer-btn{
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+            background-color: #046c39;
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+        }
+    </style>
 </head>
 <body>
 
@@ -62,7 +87,7 @@ if (isset($_SESSION['username'])) {
 
     // Check if there are any rows returned
     if ($result->num_rows > 0) {
-        echo "<table border='1'>";
+        echo "<table border='1' class='table table-hover'>";
         echo "<tr>";
         echo "<th>Username</th>";
         echo "<th>District</th>";
@@ -94,16 +119,16 @@ if (isset($_SESSION['username'])) {
                         <input type="hidden" name="justification_id" value="' . $row['n_dm'] . '">
                         <input type="text" name="justification" value="' . $row['justification'] . '">
                     </td>';
-            echo '<td><button type="submit" name="update">Envoyer</button></form></td>';
+            echo '<td><button type="submit" name="update" class="envoyer-btn">Envoyer</button></form></td>';
             echo "</tr>";
         }
 
         echo "</table>";
     } else {
-        echo "No data username.";
+        echo "<h1 style='color: #2ecc71'>Vous avez aucune dm à justifier</h1>";
     }
 } else {
-    echo "User not logged in."; // Add appropriate handling if the user is not logged in
+    echo "Error 404 : User not logined deconecter e reconecter vous"; // Add appropriate handling if the user is not logged in
 }
 
 // Close the statement and connection

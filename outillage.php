@@ -8,6 +8,8 @@
 </head>
 <body>
 
+
+
 <?php
 // Replace these variables with your actual database credentials
 $servername = "localhost";
@@ -22,7 +24,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 
 // Check if the user is logged in and their username is stored in the session
 if (isset($_SESSION['username'])) {
@@ -49,30 +50,48 @@ if (isset($_SESSION['username'])) {
         echo "<table border='1' class='table table-striped table-hover'>";
         echo "<tr>";
         echo "<th>Username</th>";
-        echo "<th>District</th>";
-        echo "<th>n_nomenclature</th>";
+        echo "<th>n_dm</th>"; // Changed from "n_nomenclature" to "n_dm"
         echo "<th>Designation</th>";
-        echo "<th>Prix Total</th>";
-        echo "<th>Quantite </th>";
-        echo "<th>Date Envoie</th>";
+        echo "<th>Quantite En Stock</th>";
+        echo "<th>Date de Verification</th>";
+        echo "<th>Nom Verificateur</th>";
+        echo "<th>Date Livraison</th>";
+        echo "<th>Etat</th>";
+        echo "<th>Options</th>";
         echo "</tr>";
 
         // Loop through the rows and display the data in table rows
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['username'] . "</td>";
-            echo "<td>" . $row['district'] . "</td>";
-            echo "<td>" . $row['n_nomenclature'] . "</td>";
-            echo "<td>" . $row['designation'] . "</td>";
-            echo "<td>" . $row['prix_total'] . "</td>";
+            echo "<td>" . $row['n_dm'] . "</td>"; // Changed from "n_nomenclature" to "n_dm"
+            echo "<td>" . substr($row['designation'], 0, 10) . "</td>"; // Show only the first 10 characters
             echo "<td>" . $row['quantite_maintenu'] . "</td>";
+            echo "<td>" . $row['date_verification'] . "</td>";
+            echo "<td>" . $row['nom_verificateur'] . "</td>";
             echo "<td>" . $row['date_envoie'] . "</td>";
+            echo "<td>";
+
+            echo "<form action='update_data.php' method='post'>";
+            echo "<input type='hidden' name='n_dm' value='" . $row['n_dm'] . "'>"; // Changed from "n_nomenclature" to "n_dm"
+            echo "<select name='etat_select'>";
+            echo "<option value='Bon pour utilisation' " . ($row['etat'] == 'Bon pour utilisation' ? 'selected' : '') . ">Bon pour utilisation</option>";
+            echo "<option value='Dégradé' " . ($row['etat'] == 'Dégradé' ? 'selected' : '') . ">Dégradé</option>";
+            echo "<option value='Hors service' " . ($row['etat'] == 'Hors service' ? 'selected' : '') . ">Hors service</option>";
+            echo "</select>";
+            echo "</td>";
+
+            echo "<td>";
+            echo "<input type='submit' value='mise à jour'>";
+            echo "</form>";
+            echo "</td>";
+
             echo "</tr>";
         }
 
         echo "</table>";
     } else {
-        echo "votre stock est vide.";
+        echo "Votre stock est vide.";
     }
 } else {
     echo "User not logged in."; // Add appropriate handling if the user is not logged in
@@ -82,6 +101,10 @@ if (isset($_SESSION['username'])) {
 $stmt->close();
 $conn->close();
 ?>
+
+
+
+
 
 </body>
 </html>

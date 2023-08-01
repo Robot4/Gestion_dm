@@ -38,15 +38,15 @@ if (isset($_GET['n_dm'])) {
             // Step 5: Data successfully inserted into the dmi table, now delete it from the justifications table
             $sql_delete = "DELETE FROM justifications WHERE n_dm = $n_dm";
             if ($conn->query($sql_delete) === TRUE) {
-                $response = array("success" => true, "message" => "Data sent to the DMI table and deleted from the justifications table successfully.");
+                $response = array("success" => true, "message" => "Envoyer");
             } else {
-                $response = array("success" => false, "message" => "Error deleting data from justifications table: " . $conn->error);
+                $response = array("success" => false, "message" => "Error " . $conn->error);
             }
         } else {
-            $response = array("success" => false, "message" => "Error inserting data into DMI table: " . $conn->error);
+            $response = array("success" => false, "message" => "Error " . $conn->error);
         }
     } else {
-        $response = array("success" => false, "message" => "No data found for the provided n_dm value.");
+        $response = array("success" => false, "message" => "aucun dm");
     }
 
     // Close the database connection

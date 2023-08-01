@@ -93,12 +93,16 @@ $usertype = $_SESSION["usertype"];
 
     <div class="btn">
 
-        <a href="#" class="btn btn-dark">Stock outillage</a>
+        <a href="rabat_outillage.php" class="btn btn-dark">Stock outillage</a>
+    </div>
+    <div class="btn">
+
+        <a href="rabat_valeur.php" class="btn btn-dark">Valeurisation District</a>
     </div>
 
     <div class="btn">
 
-        <a href="#" class="btn btn-dark">Justification</a>
+        <a href="rabat_justifications.php" class="btn btn-dark">Justification</a>
     </div>
 
     <div class="btn">

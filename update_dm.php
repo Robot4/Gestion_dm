@@ -27,33 +27,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $operation = mysqli_real_escape_string($conn, $_POST['operation']);
         $quantiteMaintenu = mysqli_real_escape_string($conn, $_POST['quantite_maintenu']);
 
-        // Insert data into the "magasin" table
-        $insertQuery = "INSERT INTO magasin (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie) SELECT username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, '$operation', '$quantiteMaintenu', NOW() FROM dmi WHERE n_dm = '$n_dm'";
+        // Get the values of date_verification and nom_verificateur from the dmi table
+        $selectQuery = "SELECT date_verification, nom_verificateur FROM dmi WHERE n_dm = '$n_dm'";
+        $result = executeQuery($selectQuery);
 
-        $result = executeQuery($insertQuery);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $dateVerification = $row['date_verification'];
+            $nomVerificateur = $row['nom_verificateur'];
 
-        if ($result === TRUE) {
-            // The insert was successful
-            echo "La Dm Inséré Au Magasinier";
+            // Insert data into the "magasin" table
+            $insertQuery = "INSERT INTO magasin (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie, date_verification, nom_verificateur) 
+                            SELECT username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, '$operation', '$quantiteMaintenu', NOW(), '$dateVerification', '$nomVerificateur' 
+                            FROM dmi WHERE n_dm = '$n_dm'";
 
-            // Now, delete the data from the 'dmi' table
-            $deleteQuery = "DELETE FROM dmi WHERE n_dm = '$n_dm'";
-            $deleteResult = executeQuery($deleteQuery);
+            $insertResult = executeQuery($insertQuery);
 
-            if ($deleteResult === TRUE) {
-                echo " .";
+            if ($insertResult === TRUE) {
+                // The insert was successful
+                echo "La Dm Inséré Au Magasinier";
+
+                // Now, delete the data from the 'dmi' table
+                $deleteQuery = "DELETE FROM dmi WHERE n_dm = '$n_dm'";
+                $deleteResult = executeQuery($deleteQuery);
+
+                if ($deleteResult === TRUE) {
+                    echo " .";
+                } else {
+                    echo "Error deleting data from 'dmi' table: " . $conn->error;
+                }
             } else {
-                echo "Error deleting data from 'dmi' table: " . $conn->error;
+                // Failed to insert
+                echo "Error inserting data: " . $conn->error;
             }
         } else {
-            // Failed to insert
-            echo "Error inserting data: " . $conn->error;
+            echo "No data found in 'dmi' table for n_dm = '$n_dm'";
         }
     } else {
         // Missing parameters
         echo "Paramètres manquants pour la mise à jour.";
     }
 }
+
 
 // Step 4: Close the database connection
 $conn->close();

@@ -32,9 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $operation = 'envoyer'; // Set a default value
         }
 
-
         // Get all the relevant data from the 'magasin' table for the specified n_dm
-        $selectQuery = "SELECT username, district, n_nomenclature, designation, prix_unitaire, quantite, projet FROM magasin WHERE n_dm = '$n_dm'";
+        $selectQuery = "SELECT username, district, n_nomenclature, designation, prix_unitaire, quantite, projet, date_verification, nom_verificateur FROM magasin WHERE n_dm = '$n_dm'";
         $result = executeQuery($selectQuery);
 
         if ($result && $result->num_rows > 0) {
@@ -49,12 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $projet = mysqli_real_escape_string($conn, $row['projet']);
             $date_saisie = $_POST['date_saisie']; // Get the date_saisie value from the form
             $prix_total = $_POST['prix_total']; // Get the prix_total value from the form
+            $date_verification = $row['date_verification']; // Get date_verification from the magasin table
+            $nom_verificateur = mysqli_real_escape_string($conn, $row['nom_verificateur']); // Get nom_verificateur from the magasin table
 
             // Insert data into the "etat_dm" table
-            $insertQuery = "INSERT INTO etat_dm (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie) 
-                VALUES ('$username', '$district', '$n_dm', '$n_nomenclature', '$designation', '$prix_unitaire', '$quantite', '$projet', '$date_saisie', '$prix_total', '$operation', '$quantiteMaintenu', NOW())";
+            $insertQuery = "INSERT INTO etat_dm (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie, date_verification, nom_verificateur) 
+            VALUES ('$username', '$district', '$n_dm', '$n_nomenclature', '$designation', '$prix_unitaire', '$quantite', '$projet', '$date_saisie', '$prix_total', '$operation', '$quantiteMaintenu', NOW(), '$date_verification', '$nom_verificateur')";
             $insertResult = executeQuery($insertQuery);
-
 
             if ($insertResult === TRUE) {
                 // Successfully inserted data into the "etat_dm" table
@@ -78,18 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Stop further execution to prevent the entire page content from being sent back
             exit();
         } else {
-            // Missing parameters
-            echo "Missing parameters for data submission.";
+            // Data not found in the "magasin" table for the specified n_dm
+            echo "Data not found in 'magasin' table for n_dm: $n_dm";
             exit();
         }
     }
 }
+
 // Fetch data from the "magasin" table
 $query = "SELECT * FROM magasin";
 $result = executeQuery($query);
 if ($result && $result->num_rows > 0) {
     // Output data in a table format
-    echo '<table border="1">';
+    echo '<table border="1" class="table table-hover">';
     echo '<tr>';
     echo '<th>n_dm</th>'; // Unique identifier column
     echo '<th>Username</th>';
@@ -139,6 +140,10 @@ $conn->close();
 <head>
     <link rel="stylesheet" href="assets/css/users.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <style>
         .envoyer-btn {
@@ -188,10 +193,6 @@ $conn->close();
             if (quantiteMaintenuElement) {
                 var quantiteMaintenu = quantiteMaintenuElement.innerText;
 
-                // Check if the 'dateSaisieElement' and 'prixTotalElement' exist and have valid values
-                var dateSaisie = dateSaisieElement ? dateSaisieElement.value : "";
-                var prixTotal = prixTotalElement ? prixTotalElement.value : "";
-
                 // Create a FormData object and add the data to be sent
                 var formData = new FormData();
                 formData.append('n_dm', n_dm);
@@ -237,3 +238,5 @@ $conn->close();
         });
     });
 </script>
+</body>
+</html>

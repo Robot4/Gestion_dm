@@ -4,6 +4,10 @@
 <head>
     <link rel="stylesheet" href="assets/css/users.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <style>
         /* Limit the width of the "Designation" column and add ellipsis for overflow */
@@ -32,7 +36,7 @@
             box-shadow: 0 -6px 12px rgb(30 26 28 / 50%);
 
         }
-        .anuler-btn{
+        .anuller-btn{
             font-family: 'Helvetica', 'Arial', sans-serif;
             display: inline-block;
             font-size: 1em;
@@ -87,58 +91,7 @@ if (isset($_GET['search'])) {
     // Check if there are any records in the result
     if ($result->num_rows > 0) {
         // Start the table
-        echo '<table border="1">';
-        // Display the table header
-        echo "<tr>";
-        echo "<th>Username</th>";
-        echo "<th>District</th>";
-        echo "<th>n_dm</th>";
-        echo "<th>n_nomenclature</th>";
-        echo "<th>Designation</th>";
-        echo "<th>Prix Unitaire</th>";
-        echo "<th>Quantite</th>";
-        echo "<th>Projet</th>";
-        echo "<th>Date Saisie</th>";
-        echo "<th>Prix Total</th>";
-        echo "<th>Decision</th>"; // New column for the buttons
-        echo "</tr>";
-
-        // Fetch each row from the result and display the data in a table row
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["username"] . "</td>";
-            echo "<td>" . $row["district"] . "</td>";
-            echo "<td>" . $row["n_dm"] . "</td>";
-            echo "<td>" . $row["n_nomenclature"] . "</td>";
-            echo '<td class="designation-column">' . $row["designation"] . "</td>";
-            echo "<td>" . $row["prix_unitaire"] . "</td>";
-            echo "<td>" . $row["quantite"] . "</td>";
-            echo "<td>" . $row["projet"] . "</td>";
-            echo "<td>" . $row["date_saisie"] . "</td>";
-            echo "<td>" . $row["prix_total"] . "</td>";
-
-            // Decision column with buttons
-            echo '<td>';
-            echo '<button class="envoyer-btn" data-n_dm="' . $row["n_dm"] . '">Envoyer</button>';
-            echo '<button>Annuler</button>';
-            echo '</td>';
-            echo "</tr>";
-        }
-
-        // Close the table
-        echo "</table>";
-    } else {
-        // If no records are found, display a message
-        echo "<h1>Aucune information trouvée pour la requête de recherche: " . $search . "</h1>";
-    }
-} else {
-    // If no search query is provided, display all data from the dm table
-    $sql = "SELECT username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie FROM dm";
-    $result = $conn->query($sql);
-    // Check if there are any records in the result
-    if ($result->num_rows > 0) {
-        // Start the table
-        echo '<table border="1">';
+        echo '<table border="1" class="table table-hover">';
         // Display the table header
         echo "<tr>";
         echo "<th>Username</th>";
@@ -172,6 +125,59 @@ if (isset($_GET['search'])) {
             echo '<td>';
             echo '<button class="envoyer-btn" data-n_dm="' . $row["n_dm"] . '">Envoyer</button>';
             echo '<br>';
+
+            echo '<button>Annuler</button>';
+            echo '</td>';
+            echo "</tr>";
+        }
+
+        // Close the table
+        echo "</table>";
+    } else {
+        // If no records are found, display a message
+        echo "<h1>Aucune information trouvée pour la requête de recherche: " . $search . "</h1>";
+    }
+} else {
+    // If no search query is provided, display all data from the dm table
+    $sql = "SELECT username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie FROM dm";
+    $result = $conn->query($sql);
+    // Check if there are any records in the result
+    if ($result->num_rows > 0) {
+        // Start the table
+        echo '<table border="1" class="table table-hover">';
+        // Display the table header
+        echo "<tr>";
+        echo "<th>Username</th>";
+        echo "<th>District</th>";
+        echo "<th>n_dm</th>";
+        echo "<th>n_nomenclature</th>";
+        echo "<th>Designation</th>";
+        echo "<th>Prix Unitaire</th>";
+        echo "<th>Quantite</th>";
+        echo "<th>Projet</th>";
+        echo "<th>Date Saisie</th>";
+        echo "<th>Prix Total</th>";
+        echo "<th>Decision</th>"; // New column for the buttons
+        echo "</tr>";
+
+        // Fetch each row from the result and display the data in a table row
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["username"] . "</td>";
+            echo "<td>" . $row["district"] . "</td>";
+            echo "<td>" . $row["n_dm"] . "</td>";
+            echo "<td>" . $row["n_nomenclature"] . "</td>";
+            echo '<td class="designation-column">' . $row["designation"] . "</td>";
+            echo "<td>" . $row["prix_unitaire"] . "</td>";
+            echo "<td>" . $row["quantite"] . "</td>";
+            echo "<td>" . $row["projet"] . "</td>";
+            echo "<td>" . $row["date_saisie"] . "</td>";
+            echo "<td>" . $row["prix_total"] . "</td>";
+
+            // Decision column with buttons
+            echo '<td>';
+            echo '<button class="envoyer-btn" data-n_dm="' . $row["n_dm"] . '">Envoyer</button>';
+
             echo '<button class="anuller-btn" data-n_dm="' . $row["n_dm"] . '">Annuler</button>';
 
             echo '</td>';
@@ -181,8 +187,11 @@ if (isset($_GET['search'])) {
         // Close the table
         echo "</table>";
     } else {
-        // If no records are found, display a message
-        echo "<h1>There is no order yet</h1>";
+        echo "<center>";
+
+        echo "<p>Aucune DM pour l'instant</p>";
+        echo "</center>";
+
     }
 }
 
