@@ -42,21 +42,15 @@
     </div>
 </header>
 
+<div class="center-container">
 
-<center>
 
 
 <div class="btn">
 
     <a href="login.php">LOGIN</a>
 </div>
-
-</center>
-
-
-
-
-
+</div>
 
 
 

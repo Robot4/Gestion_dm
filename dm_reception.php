@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>User Data</title>
     <link rel="stylesheet" href="assets/css/users.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -8,24 +9,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <style>
-        .envoyer-btn{
+
+
+        .accepter {
+            font-family: 'Helvetica', 'Arial', sans-serif;
             display: inline-block;
-            font-weight: 400;
-            line-height: 1.5;
-            background-color: #046c39;
-            color: #ffffff;
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
+            font-size: 1em;
+            padding: 12.1px 3em;
+            margin-top: -1px;
+            margin-bottom: 11px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: green;
+            border-radius: -25px;
+            border: none;
             cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-            border: 1px solid transparent;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            border-radius: 0.25rem;
-            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            position: relative;
+            /* transition: transform cubic-bezier(0, 0, 0, 0.79) 0.1s, box-shadow ease-in 0.25s; */
+            box-shadow: 0 0px 7px rgb(30 26 28 / 50%);
+
 
         }
     </style>
@@ -52,26 +54,8 @@ if (isset($_SESSION['username'])) {
     // Get the username of the currently logged-in user
     $desired_username = $_SESSION['username'];
 
-    // Handle form submission to update justifications
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST['update'])) {
-            $justification_id = isset($_POST['justification_id']) ? $_POST['justification_id'] : null;
-            $new_justification = $_POST['justification'];
-
-            // Update the justification in the database
-            if ($justification_id !== null) {
-                $stmt = $conn->prepare("UPDATE justifications SET justification = ? WHERE n_dm = ?");
-                $stmt->bind_param("si", $new_justification, $justification_id);
-                $stmt->execute();
-                $stmt->close();
-            } else {
-                echo "Invalid justification_id.";
-            }
-        }
-    }
-
     // Prepare the SQL query with a placeholder for the username
-    $sql = "SELECT * FROM justifications WHERE username = ?";
+    $sql = "SELECT * FROM reception WHERE username = ?";
 
     // Create a prepared statement
     $stmt = $conn->prepare($sql);
@@ -91,15 +75,12 @@ if (isset($_SESSION['username'])) {
         echo "<tr>";
         echo "<th>Username</th>";
         echo "<th>District</th>";
-        echo "<th>N_demande</th>";
         echo "<th>n_nomenclature</th>";
         echo "<th>Designation</th>";
-        echo "<th>quantite</th>";
-        echo "<th>Prix Unitaire</th>";
         echo "<th>Prix Total</th>";
-        echo '<th>Date Saisie</th>';
-        echo '<th style="color: red;">Justification</th>';
-        echo '<th>Action</th>';
+        echo "<th>Quantite </th>";
+        echo "<th>Date Envoie</th>";
+        echo "<th>Actions</th>";
         echo "</tr>";
 
         // Loop through the rows and display the data in table rows
@@ -107,34 +88,43 @@ if (isset($_SESSION['username'])) {
             echo "<tr>";
             echo "<td>" . $row['username'] . "</td>";
             echo "<td>" . $row['district'] . "</td>";
-            echo "<td>" . $row['n_dm'] . "</td>";
             echo "<td>" . $row['n_nomenclature'] . "</td>";
-            echo "<td>" . substr($row['designation'], 0, 10) . "</td>"; // Show only the first 10 characters
-            echo '<td>' . $row['quantite'] . '</td>';
-            echo '<td>' . $row['prix_unitaire'] . '</td>';
+            echo "<td>" . $row['designation'] . "</td>";
             echo "<td>" . $row['prix_total'] . "</td>";
-            echo "<td>" . $row['date_saisie'] . "</td>";
-            echo '<td>
-                    <form method="post">
-                        <input type="hidden" name="justification_id" value="' . $row['n_dm'] . '">
-                        <input type="text" name="justification" value="' . $row['justification'] . '">
-                    </td>';
-            echo '<td><button type="submit" name="update" class="envoyer-btn">Envoyer</button></form></td>';
+            echo "<td>" . $row['quantite_maintenu'] . "</td>";
+            echo "<td>" . $row['date_envoie'] . "</td>";
+            echo "<td><a href='rabat.php'> <button class='accepter' onclick=\"accepterData('" . $row['username'] . "', '" . $row['district'] . "', '" . $row['n_nomenclature'] . "', '" . $row['designation'] . "', '" . $row['prix_total'] . "', '" . $row['quantite_maintenu'] . "', '" . $row['date_envoie'] . "')\">Accepter</button></a></td>";
             echo "</tr>";
         }
 
         echo "</table>";
     } else {
-        echo "<h2 >Vous avez aucune dm à justifier</h2>";
+        echo "<h2>vous ñ'avez aucun DM pour réceptionner.</h2>";
     }
 } else {
-    echo "Error 404 : User not logined deconecter e reconecter vous"; // Add appropriate handling if the user is not logged in
+    echo "User not logged in."; // Add appropriate handling if the user is not logged in
 }
 
 // Close the statement and connection
 $stmt->close();
 $conn->close();
 ?>
+
+<script>
+    function accepterData(username, district, n_nomenclature, designation, prix_total, quantite_maintenu, date_envoie) {
+        // AJAX request to send the data to the etat_dm table
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Handle the response from the server if needed
+                console.log(this.responseText);
+            }
+        };
+        xhttp.open("POST", "accepter_data.php", true); // Change "accepter_data.php" to the file handling the insertion into etat_dm table
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("username=" + encodeURIComponent(username) + "&district=" + encodeURIComponent(district) + "&n_nomenclature=" + encodeURIComponent(n_nomenclature) + "&designation=" + encodeURIComponent(designation) + "&prix_total=" + encodeURIComponent(prix_total) + "&quantite_maintenu=" + encodeURIComponent(quantite_maintenu) + "&date_envoie=" + encodeURIComponent(date_envoie));
+    }
+</script>
 
 </body>
 </html>

@@ -52,12 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom_verificateur = mysqli_real_escape_string($conn, $row['nom_verificateur']); // Get nom_verificateur from the magasin table
 
             // Insert data into the "etat_dm" table
-            $insertQuery = "INSERT INTO etat_dm (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie, date_verification, nom_verificateur) 
+            $insertQuery = "INSERT INTO reception (username, district, n_dm, n_nomenclature, designation, prix_unitaire, quantite, projet, date_saisie, prix_total, operation, quantite_maintenu, date_envoie, date_verification, nom_verificateur) 
             VALUES ('$username', '$district', '$n_dm', '$n_nomenclature', '$designation', '$prix_unitaire', '$quantite', '$projet', '$date_saisie', '$prix_total', '$operation', '$quantiteMaintenu', NOW(), '$date_verification', '$nom_verificateur')";
             $insertResult = executeQuery($insertQuery);
 
             if ($insertResult === TRUE) {
-                // Successfully inserted data into the "etat_dm" table
 
                 // Now, delete the data from the 'magasin' table
                 $deleteQuery = "DELETE FROM magasin WHERE n_dm = '$n_dm'";

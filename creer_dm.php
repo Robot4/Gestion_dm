@@ -59,24 +59,7 @@
             border-bottom:1px solid #757575;
 
         }
-        .bubbly-button {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            display: inline-block;
-            font-size: 1em;
-            padding: 1em 4em;
-            margin-top: 68px;
-            margin-bottom: 74px;
-            -webkit-appearance: none;
-            appearance: none;
-            background-color: #f1811b;
 
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            transition: transform cubic-bezier(0, 0, 0, 0.79) 0.1s, box-shadow ease-in 0.25s;
-            box-shadow: 0 2px 25px rgb(30 26 28 / 50%);
-        }
         li{
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: #0b2037;

@@ -110,9 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-<br><br><br><br><br><br>
-
-<!-- Form to update information and profile image -->
+<br>
+<br>
+<br>
+<br>
 <center>
     <div class="container">
         <div class="header">
@@ -179,5 +180,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php endif; ?>
 
 <script src="assets/js/panel.js"></script>
+
+<style>
+    /* Your existing CSS */
+    /* ... (Place your existing CSS code here) ... */
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 768px) {
+        .user-container, .container {
+            padding: 10px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        img.profile-image {
+            width: 120px;
+            height: 120px;
+        }
+
+        .vertical-line {
+            display: none; /* Hide the vertical line on smaller screens */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .user-container, .container {
+            padding: 10px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        img.profile-image {
+            width: 100px;
+            height: 100px;
+        }
+    }
+</style>
+
 </body>
 </html>

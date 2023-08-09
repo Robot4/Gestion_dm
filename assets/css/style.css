@@ -8,6 +8,7 @@
 }
 
 
+
 img {
     width: 60%;
 }
@@ -68,10 +69,19 @@ header .login-signup a {
     padding: 12px 78px;
     border-radius: 16px;
     font-weight: bold;
-    margin-top: 100px;
 
 
 }
+
+
+.center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+
 header .header-right .hamburger {
     margin-left: 20px;
     cursor: pointer;
